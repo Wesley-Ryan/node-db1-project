@@ -12,4 +12,15 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  AccountsHelper.getById(id)
+    .then((account) => {
+      res.status(200).json(account);
+    })
+    .catch((error) => {
+      res.status(400).json({ message: error.message });
+    });
+});
+
 module.exports = router;
