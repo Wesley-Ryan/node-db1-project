@@ -23,4 +23,21 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+  const account = req.body;
+  if (!account.name && !account.budget) {
+    res
+      .status(500)
+      .json({ message: "Missing required Name and Budget fields." });
+  } else {
+    AccountsHelper.add(account)
+      .then((newAccount) => {
+        res.status(201).json(newAccount);
+      })
+      .catch((error) => {
+        res.status(400).json({ message: error.message });
+      });
+  }
+});
+
 module.exports = router;
