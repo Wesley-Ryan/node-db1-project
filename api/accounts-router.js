@@ -40,4 +40,18 @@ router.post("/", (req, res) => {
   }
 });
 
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+  AccountsHelper.update(id, changes)
+    .then(() => {
+      AccountsHelper.getById(id).then((updatedAccount) => {
+        res.status(201).json(updatedAccount);
+      });
+    })
+    .catch((error) => {
+      res.status(400).json({ message: error.message });
+    });
+});
+
 module.exports = router;

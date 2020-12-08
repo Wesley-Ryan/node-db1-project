@@ -14,4 +14,7 @@ module.exports = {
         return db("accounts").where("id", id);
       });
   },
+  update(id, account) {
+    return db("accounts").where("id", id).update(account);
+  },
 };
