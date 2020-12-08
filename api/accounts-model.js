@@ -17,4 +17,7 @@ module.exports = {
   update(id, account) {
     return db("accounts").where("id", id).update(account);
   },
+  delete(id) {
+    return db("accounts").where("id", id).delete();
+  },
 };

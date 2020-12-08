@@ -54,4 +54,17 @@ router.put("/:id", (req, res) => {
     });
 });
 
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  AccountsHelper.delete(id)
+    .then(() => {
+      res
+        .status(201)
+        .json({ message: `The Account with id ${id} has been removed.` });
+    })
+    .catch((error) => {
+      res.status(400).json({ message: error.message });
+    });
+});
+
 module.exports = router;
